@@ -143,12 +143,12 @@ export class RedditService {
   
  
   public uploadFormData(formData: any) {
-    return this.http.post<any>('https://api.alpes-solutech.fr/api/upload', formData);
+    return this.http.post<any>('', formData);
   }
 
   getGeocode(text: string): Observable<any> {
     return this.http
-      .get<any>("https://api.geoapify.com/v1/geocode/search?text="+ text +"&apiKey=636cdf779a8c4b778f2cc84de97ced34",this.httpOptions)
+      .get<any>("https://api.geoapify.com/v1/geocode/search?text="+ text +"&apiKey=",this.httpOptions)
       .pipe(retry(2),catchError(this.handleError))
   }
   
