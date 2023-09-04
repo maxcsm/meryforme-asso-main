@@ -1,0 +1,483 @@
+
+
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start" >
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="primary"> Profil </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content responsive-sm  class="ion-padding">
+<ion-row>
+ 
+
+  <ion-col sizeLg="6" sizeMd="6" sizeXs="12" class="padding"  >
+    <ion-list lines="none" *ngIf="edit2==false && client" style="margin-top: 20px;display:none"  >
+      <ion-row >
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+
+
+        <ion-item>
+        <b>  Adresse de facturation </b> 
+        <div class="item-note" slot="end">
+        <ion-button ion-button item-end small color="secondary"  (click)="editpage2()"><ion-icon  md="brush"></ion-icon></ion-button>
+        </div>
+        </ion-item> 
+
+        <ion-item  *ngFor="let item of posts" >
+        <ion-label> 
+          <b>  {{item.shipping_address}} </b><br>
+          <b>  {{item.shipping_cp}} {{item.shipping_city}}</b> <br>
+          <b>  {{item.shipping_state}} {{item.shipping_country}}</b> <br>
+          Téléphone  : <b>   {{item.shipping_phone}} </b> <br>
+          Téléphone autre  : <b>  {{item.billing_phone}} </b> <br>
+          TVA : <b> {{item.tva_number}} </b> <br>
+          Siret: <b>  {{item.siret_number}} </b> <br>
+          </ion-label> 
+          </ion-item>
+          </ion-col>   
+    </ion-row>
+    </ion-list>
+
+
+    <ion-list  style="margin-top: 20px;" [hidden]="!edit3" >
+      <ion-row > 
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+        <ion-item >
+        <b> Nouvelle inscription adhérent pratiquant  </b>
+        <div  slot="end">
+        <ion-button ion-button item-end small  (click)="editpage3()"><ion-icon name="close-outline"></ion-icon></ion-button>
+        </div>
+        </ion-item>
+        </ion-col>  
+      </ion-row>
+      </ion-list>
+
+
+
+    <ion-button color="primary" expand="block" [hidden]="edit3" style="margin-top: 20px;" (click)="editpage3()" >
+      <ion-icon name="add-circle"></ion-icon>Ajouter un abonnement 
+    </ion-button>
+
+
+
+
+
+
+
+    <ion-button id="open-modal1" expand="block" [hidden]="!edit3" (click)="searchTech()" color="primary" style="margin-top: 20px;" >
+      <ion-icon name="add-circle"></ion-icon>Choisir un ou des activités
+    </ion-button>
+    
+
+    <ion-row  *ngIf="edit6==false" [hidden]="!edit3">
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+      <b color="primary"> Aucune activité selectionnée </b>
+      </ion-col>
+      </ion-row>
+
+
+      <ion-item button class="ion-text-wrap" *ngFor="let item of catresult" >
+        <ion-label>
+          <ion-text>
+            <h2><b>{{item.title}}</b></h2>
+            <small> {{item.content}} </small> <br>
+            <small> Age mini :  {{item.age_min}} ans - Age max :  {{item.age_max}} ans</small> <br>
+            <small> Autorisation_parentale : 
+            <b *ngIf="item.autorisation_parentale==0"> Non  </b>
+            <b  *ngIf="item.autorisation_parentale==1"> Oui  </b>
+              - avec {{item.intervenant}}</small> <br>
+            <ion-badge>  {{item.price}} € </ion-badge>
+          </ion-text>
+        </ion-label>
+        </ion-item>   
+
+    <ion-list *ngIf="edit6==true" style="margin-top: 20px;" class="padding" >
+
+
+    <form [formGroup]="onStep3Form" (ngSubmit)="doCreatedInvoice()" novalidate class="list-form" >
+  
+    <ion-row  >
+    <ion-item >
+    <b> Coordonnées pratiquant </b>
+    </ion-item>
+    </ion-row>
+   
+    <ion-row   >
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+    Nom * <br>
+    <ion-item class="roundedInput">
+    <ion-label position="floating">Nom </ion-label>
+    <ion-input inputmode="text" [(ngModel)]="lastname_activite"  formControlName="lastname_activite" >  </ion-input>
+    </ion-item>
+    </ion-col>
+   
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+    Prénom * <br>
+    <ion-item class="roundedInput">
+    <ion-label position="floating">Prénom </ion-label>
+    <ion-input inputmode="text"[(ngModel)]="firstname_activite"  formControlName="firstname_activite">  </ion-input>
+    </ion-item>
+    </ion-col>
+    </ion-row>
+
+
+    <ion-row  >
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+    Date de naissance * <br>
+    <ion-item class="roundedInput">
+    <ion-label position="floating">Date de naissance </ion-label>
+    <ion-input type="date" [(ngModel)]="birthdate_activite"  formControlName="birthdate_activite">  </ion-input>
+    </ion-item>
+    </ion-col>
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+    </ion-col>
+    </ion-row>
+
+    <ion-row  >
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+      Moyen(s) de paiement(s) * <br>
+
+
+        <ion-item >
+          <ion-select label="Default label" placeholder="Choisir" [(ngModel)]="moyendepaiement" formControlName="moyen" multiple="true" okText="Ok" cancelText="Annuler">
+            <ion-select-option class="select-full-width" value="CB (HelloAsso)"  > 
+              CB (HelloAsso)
+            </ion-select-option>
+            <ion-select-option class="select-full-width" value="CB en 3 fois (HelloAsso)"  > 
+              CB en 3 fois (HelloAsso)
+            </ion-select-option>
+            <ion-select-option class="select-full-width" value="Chèque en 1 fois"  > 
+              Chèque en 1 fois
+            </ion-select-option>
+            <ion-select-option class="select-full-width" value="ANCV Chèque-Vacances"  > 
+              ANCV Chèque-Vacances
+            </ion-select-option>
+            <ion-select-option class="select-full-width" value="ANCV Coupon Sport"  > 
+              ANCV Coupon Sport
+            </ion-select-option>
+            <ion-select-option class="select-full-width" value="Pass'Sport"  > 
+             Pass'Sport
+            </ion-select-option>
+             <ion-select-option class="select-full-width" value="Carte OKAY Savoie collégien"  > 
+            Carte OKAY Savoie collégien
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      </ion-row>
+
+
+    <div style="padding-top: 30px;">
+    <ion-button size="light"  expand="full" shape="round"  type="submit"  [disabled]="!onStep3Form.valid"   [hidden]="!edit6" > Suivant </ion-button>
+    </div>
+  </form>
+   </ion-list>
+
+   <ion-list *ngIf="edit5==true" style="margin-top: 20px;" >
+    <ion-row >
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+      <ion-item >
+      <b>total : {{totalprice}} €</b>
+      </ion-item>
+      <ion-button [hidden]="!edit5" color="primary" expand="block" style="margin-top: 20px;" (click)="goPaiement2()">Paiement CB 1X </ion-button>
+
+      <ion-button [hidden]="!edit5" color="light" expand="block"  style="margin-top: 20px;" (click)="goPaiement4()"> Enregistrer sans payer en ligne</ion-button>
+    </ion-col>  
+    </ion-row>
+    </ion-list>
+
+
+    <ion-list style="margin-top: 20px;" [hidden]="edit3" >
+        <ion-row >
+          <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+            <ion-item >
+              <b> Abonnements </b>
+             </ion-item>
+            </ion-col>  
+        </ion-row>
+  
+      <ion-list  *ngFor="let item of listappointements" >
+        <ion-item class="ion-text-wrap" >
+        <ion-label  class="ion-text-wrap" >
+          <b> {{item.title}}</b> <br>
+           {{item.content}} <br>
+          <small> Nom/Prénom : <b>{{item.firstname_activite}}  {{item.lastname_activite}}</b> - né le : <b>{{item.birthdate_activite| date: 'dd/MM/yyyy'}}</b> </small><br>
+          <small> Enregitré le <b>{{item.start_at| date: 'dd/MM/yyyy'}}</b> </small> <br>
+          <small> {{item.moyendepaiement}} </small> <br>
+          <ion-badge color="danger" slot="end"  *ngIf="item.state==1">  </ion-badge>
+          <ion-badge color="warning" slot="end" *ngIf="item.state==2">  </ion-badge>
+          <ion-badge color="success" slot="end" *ngIf="item.state==3">  Validé </ion-badge>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-list>
+
+
+  <ion-list style="margin-top: 20px;" [hidden]="edit3"  style="display: none;" >
+    <ion-row >
+      <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+        <ion-item >
+        <b>  Mes paiements </b>
+        </ion-item>
+        </ion-col>  
+    </ion-row>
+    <ion-list >
+      <ion-item  >
+        <ion-label > 
+          <div style="padding-top:5px;"> 
+          gfdhgfh <b> </b> 
+        </div> 
+        </ion-label> 
+      
+      </ion-item>
+    </ion-list>
+  </ion-list>
+
+    <ion-list style="margin-top: 20px;display: none;"  >
+      <ion-row >
+        <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+          <ion-item >
+            <b>  Factures </b>
+           </ion-item>
+          </ion-col>  
+    </ion-row>
+    <ion-list >
+      <ion-item *ngFor="let item of listinvoices" >
+        <ion-label > 
+          <div style="padding-top:5px;"> 
+          <img src="../assets/icon/pdf.png"  >  
+           FACTURE <b>{{item.InvoiceID}} - {{item.Total}} €</b> 
+        </div> 
+        </ion-label> 
+        <div class="item-note" slot="end">
+          <ion-button ion-button item-end large color="danger" target="_blank" href="https://www.api.meryforme.fr/api/invoice/{{item.InvoiceID}}">Télécharger 
+            <ion-icon  ios="download-outline" md="download-outline" ></ion-icon></ion-button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-list>
+</ion-col>  
+
+<ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+  <ion-list lines="none" *ngIf="edit==false" style="margin-top: 20px;" >
+    <ion-row >
+      <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+        <ion-item  *ngFor="let item of posts"  lines="none">    
+            <ion-label> 
+            <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.customer_type=='business'" > Entreprise </ion-button>
+            <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.customer_type=='individual'" > Particulier </ion-button><br>
+            <b>  id: {{item.id}}</b>   <br>
+            <b> {{item.company}}</b>   <br>
+            <b> {{item.salutation}} {{item.firstname}} {{item.lastname}}</b>  <br>
+            <b>  {{item.address}} </b><br>
+            <b>  {{item.cp}} {{item.city}}</b> <br>
+            Téléphone : <b> {{item.phone_mobile}} </b> <br>
+            E-mail :  <b>  {{item.email}} </b> <br>
+            Notes :  <ion-label  class="ion-text-wrap" >
+            <b>{{item.notes}} </b>
+            </ion-label>
+            </ion-label> 
+            </ion-item>
+        </ion-col>   
+        <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >    
+        <ion-item>
+        <div class="item-note" slot="end">
+        <ion-button ion-button item-end small  (click)="editpage()"><ion-icon name="create-outline"></ion-icon></ion-button>
+        </div>
+        </ion-item> 
+      </ion-col>
+  </ion-row>
+</ion-list>
+
+<ion-list lines="none"  *ngIf="edit==true">
+  <ion-row >
+    <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+      <ion-row >
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          Id: {{iduser}}  <br>
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">Nom entreprise</ion-label>
+            <ion-input inputmode="text"[(ngModel)]="company" placeholder="Nom entreprise">  </ion-input>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+                
+       <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+            <ion-item  class="roundedInput">
+              <ion-label position="stacked">Type</ion-label>
+              <ion-select multiple="false" [(ngModel)]="customer_type" okText="Ok" cancelText="Annuler">
+                <ion-select-option value="business">Entreprise</ion-select-option>
+                <ion-select-option value="individual">Particulier</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+         <ion-row >
+        <ion-col sizeLg="2" sizeMd="2" sizeXs="12" >
+          <ion-item  class="roundedInput">
+            <ion-label position="stacked">Civilité </ion-label>
+            <ion-select multiple="false" [(ngModel)]="salutation">
+              <ion-select-option value="M.">M.</ion-select-option>
+              <ion-select-option value="Mme.">Mme.</ion-select-option>
+            </ion-select>
+          </ion-item>
+       </ion-col>
+        <ion-col sizeLg="5" sizeMd="5" sizeXs="12" >
+           <ion-item class="roundedInput">
+             <ion-label color="dark" position="stacked">Nom</ion-label>
+            <ion-input inputmode="text"[(ngModel)]="lastname" placeholder="Nom" >  </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col sizeLg="5" sizeMd="5" sizeXs="12" > 
+           <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">Prénom</ion-label>
+            <ion-input inputmode="text"[(ngModel)]="firstname" placeholder="Prénom">  </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    <ion-row >
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+        <ion-item class="roundedInput">
+          <ion-label color="dark" position="stacked">Adresse</ion-label>
+          <ion-input inputmode="text"[(ngModel)]="address" placeholder="Adresse">  </ion-input>
+        </ion-item>
+      </ion-col>
+     </ion-row>
+
+    <ion-row   >
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+        <ion-item class="roundedInput">
+          <ion-label color="dark" position="stacked">CP</ion-label>
+          <ion-input inputmode="text"[(ngModel)]="cp" placeholder="Code postal">  </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+        <ion-item class="roundedInput">
+          <ion-label color="dark" position="stacked">Ville</ion-label>
+          <ion-input inputmode="text"[(ngModel)]="city" placeholder="Ville">  </ion-input>
+        </ion-item>
+      </ion-col>
+     </ion-row>
+
+
+    <ion-row >
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+        <ion-item class="roundedInput">
+          <ion-label color="dark" position="stacked"> Téléphone </ion-label>
+          <ion-input inputmode="phone"[(ngModel)]="phone_mobile" placeholder="mobile">  </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+      </ion-col>
+     </ion-row>
+     <ion-row >
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+        <ion-item class="roundedInput">
+          <ion-textarea placeholder="Ajoutez un commentaire ici ..." [autoGrow]="true" [(ngModel)]="notes">
+        </ion-textarea>
+        </ion-item>
+      </ion-col>
+     </ion-row>
+      <ion-item >
+        <div class="item-note" slot="end">
+        <ion-button color="light" size="medium" (click)="editpage()" >Annuler </ion-button>
+        <ion-button color="primary" size="medium" (click)="doSaveUser()">Enregistrer</ion-button>
+        </div>
+       </ion-item>
+    </ion-col>
+</ion-row>
+</ion-list>
+
+<ion-list lines="none" *ngIf="edit4==false" style="margin-top: 20px;" [hidden]="edit3" >
+  <ion-row >
+    <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+     <ion-button color="primary" expand="block" (click)="editpage4()" > Effectuer un paiement </ion-button>
+    </ion-col>   
+</ion-row>
+</ion-list>
+
+<ion-list style="margin-top: 20px;"  *ngIf="edit4==true" >
+  <ion-row >
+  <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+  <ion-item >
+  <b>  Paiement montant libre </b>
+  <div  slot="end">
+  <ion-button ion-button item-end small  (click)="editpage4close()"><ion-icon name="close-outline"></ion-icon></ion-button>
+  </div>
+  </ion-item>
+  </ion-col>  
+  </ion-row>
+    <ion-row >
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+      <ion-item class="roundedInput">
+      <ion-input  type="number" step="0.50" [(ngModel)]="totalprice" placeholder="0.00">  </ion-input>
+      </ion-item>
+      </ion-col>  
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+    </ion-col> 
+    </ion-row>
+    <ion-row >
+    <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+    <ion-button color="primary" expand="block" (click)="goPaiement1()" [disabled]="totalprice == null || totalprice == 0 "> Passer au paiement </ion-button>
+    </ion-col>   
+    </ion-row>
+</ion-list>
+  
+
+</ion-col>
+</ion-row>
+</ion-content>
+
+
+<ion-modal trigger="open-modal1"  style="padding-top: 200px;" >
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+     
+        </ion-buttons>
+        <ion-title> Choisir mes activités </ion-title>
+        <ion-buttons slot="end" color="primary">
+          <ion-button (click)="cancel()"> Annuler </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+
+            <ion-list>
+              <ion-item button class="ion-text-wrap" *ngFor="let item of products">
+                <ion-label>
+                  <ion-text>
+                    <h2><b>{{item.title}}</b></h2>
+                    <small> {{item.content}} </small> <br>
+                    <small> Age mini :  {{item.age_min}} ans - Age max :  {{item.age_max}} ans</small> <br>
+                    <small> Autorisation_parentale : 
+                    <b *ngIf="item.autorisation_parentale==0"> Non  </b>
+                    <b  *ngIf="item.autorisation_parentale==1"> Oui  </b>
+                      - avec {{item.intervenant}}</small> <br>
+                    <ion-badge>  {{item.price}} € </ion-badge>
+                  </ion-text>
+                </ion-label>
+        
+                <ion-buttons slot="end" >
+                  <ion-label>
+                  <ion-text>
+                  <ion-badge color="primary" *ngIf="item.nb_free>0 && item.nb_free<item.nb_places || item.nb_free==item.nb_places"  (click)="add($event, item)" > 
+                  <ion-icon name="add-circle"></ion-icon> Réserver </ion-badge> <br>
+                  <ion-badge color="light" *ngIf="item.nb_free>0"> {{item.nb_free}}/{{item.nb_places}} place(s) </ion-badge>
+                  <ion-badge color="light" shape="round" color="light"  *ngIf="item.nb_free==0"> Complet {{item.nb_free}}/{{item.nb_places}}  </ion-badge>
+                  </ion-text>
+                  </ion-label>
+                </ion-buttons>
+
+              </ion-item>            
+            </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>

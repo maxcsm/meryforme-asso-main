@@ -1,0 +1,117 @@
+
+  <ion-header >
+    <ion-toolbar color="secondary">
+  
+
+      <ion-buttons slot="start">
+        1.1.3
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button fill="outline" [routerLink]="['/register']" color="primary"> Nouvelle inscription</ion-button>
+ 
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+     <ion-content >
+      <ion-grid >
+       
+         <ion-row class="padding">
+         <ion-col sizeLg="6" sizeMd="6" sizeXs="12" style="border: 2px;border-width: 2px;"  class="bloc">
+            <!-- Logo -->
+            <div  class="ion-padding-horizontal ion-text-center" style="padding-top: 5%;padding-bottom: 5%;">
+              <img  src="../assets/icon/logo.png"  >
+            </div>
+     
+
+         <!-- Login form -->
+         <form [formGroup]="onLoginForm" class="list-form">
+           <ion-item >
+             <ion-label position="floating">
+              <ion-icon name="mail-outline" item-start></ion-icon>
+               Email
+             </ion-label>
+             <ion-input  type="email"  [(ngModel)]="email" formControlName="email"></ion-input>
+           </ion-item>
+     
+     
+     
+           <p ion-text class="text08" *ngIf="onLoginForm.get('email')">
+             <ion-text color="light">
+               * Email requis.
+             </ion-text>
+           </p>
+     
+           <ion-item >
+             <ion-label position="floating">
+            <ion-icon name="lock-closed-outline"  item-start></ion-icon>
+             Mot de passe 
+             </ion-label>
+             <ion-input  type="password"  [(ngModel)]="password" formControlName="password"></ion-input>
+           </ion-item>
+           <p ion-text color="warning" class="text08" *ngIf="onLoginForm.get('password')">
+             <ion-text color="light">
+                 * Mot de passe requis.
+             </ion-text>
+             </p>
+         </form>
+     
+         <div class="ion-margin-top ion-text-right" >
+         <a  [routerLink]="['/forgotpassword']">
+           <ion-text >
+             <strong> Mot de passe oublié </strong>
+           </ion-text>
+         </a>
+       </div>
+    
+         <div>
+           <ion-button icon-left size="primary" expand="full" shape="round" (click)="goLogin()" [disabled]="!onLoginForm.valid" tappable>
+           Connexion
+           </ion-button>
+         </div>
+
+         <ion-button icon-left size="primary" expand="full" shape="round" [routerLink]="['/register']"  tappable>
+          Nouvelle inscription ici !
+          </ion-button>
+
+
+         </ion-col>
+         <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+         <img  src="../assets/back1.jpg"  >
+
+
+         <ion-list >
+          <ion-item  class="ion-text-wrap" *ngFor="let item of products" [routerLink]="['/register']">
+            <ion-label>
+              <ion-text>
+                <h2><b>{{item.title}}</b></h2>
+                <small> {{item.content}} </small> <br>
+                <small> Age mini :  {{item.age_min}} ans - Age max :  {{item.age_max}} ans</small> <br>
+                <small> Autorisation_parentale : 
+                <b *ngIf="item.autorisation_parentale==0"> Non  </b>
+                <b  *ngIf="item.autorisation_parentale==1"> Oui  </b>
+                  - avec {{item.intervenant}}</small> <br>
+                  <ion-badge color="primary" *ngIf="item.nb_free>0"> {{item.nb_free}}/{{item.nb_places}} place(s) </ion-badge>
+                  <ion-badge color="light" shape="round" color="light"  *ngIf="item.nb_free==0"> Complet {{item.nb_free}}/{{item.nb_places}}  </ion-badge>
+              </ion-text>
+            </ion-label>
+    
+          </ion-item>            
+        </ion-list>
+
+
+
+        </ion-col>
+     
+       </ion-row>
+
+    
+     </ion-grid>
+        
+     
+     
+     
+     </ion-content>
+     

@@ -1,0 +1,368 @@
+
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start" color="primary">
+      <ion-back-button color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary"> Nouvelle inscription  </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content >
+<ion-row>
+  <ion-col sizeLg="4" sizeMd="3" sizeXs="12" >
+  </ion-col>
+  <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+
+
+     
+         <form [formGroup]="onRegisterForm" (ngSubmit)="submitForm()" novalidate class="list-form" *ngIf="form0">
+
+          <h2 color="primary"> Adhérent pratiquant ou parent </h2>
+          <ion-row >
+            <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+              E-mail * <br>
+              <ion-item class="roundedInput">
+                <ion-label  position="floating">E-mail</ion-label>
+                <ion-input inputmode="text" [(ngModel)]="email" formControlName="email">  </ion-input>
+              </ion-item>
+            </ion-col>
+           </ion-row>
+           <ion-row >
+            <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+              Nom * <br>
+               <ion-item class="roundedInput">
+                 <ion-label position="floating">Nom </ion-label>
+                <ion-input inputmode="text" [(ngModel)]="lastname" formControlName="lastname">  </ion-input>
+              </ion-item>
+            </ion-col>
+         
+            <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+              Prénom * <br>
+               <ion-item class="roundedInput">
+                <ion-label position="floating">Prénom </ion-label>
+                <ion-input inputmode="text"[(ngModel)]="firstname" formControlName="firstname">  </ion-input>
+              </ion-item>
+            </ion-col>
+        </ion-row>
+  
+
+    
+      <ion-row >
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+           Adresse * <br>
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">Adresse</ion-label>
+            <ion-input inputmode="text"[(ngModel)]="address" placeholder="Adresse" formControlName="address">  </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+          CP * <br>
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">CP</ion-label>
+            <ion-input type="number"[(ngModel)]="cp" placeholder="Code postal" formControlName="cp">  </ion-input>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+
+      <ion-row>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+          Ville * <br>
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">Ville</ion-label>
+            <ion-input inputmode="text"[(ngModel)]="city" placeholder="Ville" formControlName="city">  </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+          Téléphone Mobile * <br>
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked"> Mobile </ion-label>
+            <ion-input type="number" [(ngModel)]="phone_mobile" placeholder="Mobile" formControlName="phone_mobile">  </ion-input>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+
+
+       Vous allez recevoir par e-mail un mot de passe pour vous connecter à votre espace.
+       <ion-row>
+        <ion-col>
+        <ion-button type="submit" color="primary" expand="block" [disabled]="!onRegisterForm.valid">  Suivant   </ion-button>
+        </ion-col>
+        </ion-row>
+      </form>
+
+
+        <form [formGroup]="adulte1Form" (ngSubmit)="submitForm1()" novalidate class="list-form"  *ngIf="form1">
+
+          <h2 color="primary"> Coordonnées du parent 1 (obligatoire) </h2>
+           <ion-row >
+            <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+              Nom * <br>
+               <ion-item class="roundedInput">
+                 <ion-label position="floating">Nom </ion-label>
+                <ion-input inputmode="text"[(ngModel)]="adulte1.nom" formControlName="lastname1">  </ion-input>
+              </ion-item>
+            </ion-col>
+         
+            <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+              Prénom * <br>
+               <ion-item class="roundedInput">
+                <ion-label position="floating">Prénom </ion-label>
+                <ion-input inputmode="text"[(ngModel)]="adulte1.prenom" formControlName="firstname1">  </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+         <ion-row >
+         <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+           Adresse * <br>
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">Adresse</ion-label>
+            <ion-input inputmode="text"[(ngModel)]="adulte1.adresse" placeholder="Adresse" formControlName="address1">  </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+          CP * <br>
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">CP</ion-label>
+            <ion-input type="number"[(ngModel)]="adulte1.cp" placeholder="Code postal" formControlName="cp1">  </ion-input>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+      <ion-row>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+          Ville * <br>
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">Ville</ion-label>
+            <ion-input inputmode="text"[(ngModel)]="adulte1.ville" placeholder="Ville" formControlName="city1">  </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+          Téléphone * <br>
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked"> Mobile </ion-label>
+            <ion-input type="number" [(ngModel)]="adulte1.telephone" placeholder="Mobile" formControlName="phone_mobile1">  </ion-input>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+
+
+
+       <h2 color="primary"> Coordonnées du parent 2 (facultatif) </h2>
+       <ion-row >
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+          Nom <br>
+           <ion-item class="roundedInput">
+             <ion-label position="floating">Nom </ion-label>
+            <ion-input inputmode="text"[(ngModel)]="adulte2.nom" formControlName="lastname1">  </ion-input>
+          </ion-item>
+        </ion-col>
+     
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+          Prénom <br>
+           <ion-item class="roundedInput">
+            <ion-label position="floating">Prénom </ion-label>
+            <ion-input inputmode="text"[(ngModel)]="adulte2.prenom" formControlName="firstname1">  </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+     <ion-row >
+     <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+       Adresse <br>
+      <ion-item class="roundedInput">
+        <ion-label color="dark" position="stacked">Adresse</ion-label>
+        <ion-input inputmode="text"[(ngModel)]="adulte2.adresse" placeholder="Adresse" formControlName="address1">  </ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+      CP <br>
+      <ion-item class="roundedInput">
+        <ion-label color="dark" position="stacked">CP</ion-label>
+        <ion-input type="number"[(ngModel)]="adulte2.cp" placeholder="Code postal" formControlName="cp1">  </ion-input>
+      </ion-item>
+    </ion-col>
+   </ion-row>
+  <ion-row>
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+      Ville <br>
+      <ion-item class="roundedInput">
+        <ion-label color="dark" position="stacked">Ville</ion-label>
+        <ion-input inputmode="text"[(ngModel)]="adulte2.ville" placeholder="Ville" formControlName="city1">  </ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+      Téléphone <br>
+      <ion-item class="roundedInput">
+        <ion-label color="dark" position="stacked"> Mobile </ion-label>
+        <ion-input type="phone" [(ngModel)]="adulte2.telephone" placeholder="Mobile" formControlName="phone_mobile1">  </ion-input>
+      </ion-item>
+    </ion-col>
+   </ion-row>
+
+
+        <ion-row>
+        <ion-col>
+        <ion-button type="submit" color="primary" expand="block"  [disabled]="!adulte1Form.valid">  Suivant </ion-button>
+        </ion-col>
+        </ion-row>
+        </form>
+
+
+          
+         <form [formGroup]="onStep2Form" (ngSubmit)="submitForm2()"  *ngIf="form2">
+          <h2 color="primary"> Mes activités </h2>
+          <ion-list  >
+            <ion-item button class="ion-text-wrap" *ngFor="let item of catresult" >
+              <ion-label>
+                <ion-text>
+                  <h2><b>{{item.title}}</b></h2>
+                  <small> {{item.content}} </small> <br>
+                  <small> nb places :  {{item.nb_places}} - avec {{item.intervenant}}</small> <br>
+                </ion-text>
+              </ion-label>
+            </ion-item>            
+          </ion-list>
+
+          <ion-row>
+            <ion-col>
+            <ion-button type="submit" color="primary" expand="block" [disabled]="catresult<1"> Suivant </ion-button>
+            </ion-col>
+            </ion-row>
+
+            <h2 color="primary"> Choisir mes activités </h2>
+            <ion-list >
+              <ion-item button   (click)="add($event, item)" class="ion-text-wrap" *ngFor="let item of products">
+                <ion-label>
+                  <ion-text>
+                    <h2><b>{{item.title}}</b></h2>
+                    <small> {{item.content}} </small> <br>
+                    <small> nb places :  {{item.nb_places}} - avec {{item.intervenant}}</small> <br>
+                    <ion-badge>  {{item.price}} € </ion-badge>
+                  </ion-text>
+                </ion-label>
+                <ion-buttons slot="end" >
+                  <ion-button  color="primary">  <ion-icon name="add-circle"></ion-icon> Réserver </ion-button>
+                </ion-buttons>
+              </ion-item>            
+            </ion-list>
+          </form>
+
+         
+
+      
+          <form [formGroup]="onStep3Form" (ngSubmit)="submitForm3()" novalidate class="list-form"  *ngIf="form3">
+          <h2 color="primary"> Moyens de paiement </h2>
+           <ion-item>
+              <ion-select label="Default label" placeholder="Choisir" [(ngModel)]="moyendepaiement" formControlName="moyen">
+                <ion-select-option class="select-full-width" value="1"  > 
+                  CB (HelloAsso)
+                </ion-select-option>
+                <ion-select-option class="select-full-width" value="2"  > 
+                  CB en 3 fois (HelloAsso)
+                </ion-select-option>
+                <ion-select-option class="select-full-width" value="3"  > 
+                  Chèque en 1 fois
+                </ion-select-option>
+                <ion-select-option class="select-full-width" value="4"  > 
+                  ANCV Chèque-Vacances
+                </ion-select-option>
+                <ion-select-option class="select-full-width" value="5"  > 
+                  ANCV Coupon Sport
+                </ion-select-option>
+                <ion-select-option class="select-full-width" value="6"  > 
+                 Pass'Sport
+                </ion-select-option>
+                 <ion-select-option class="select-full-width" value="7"  > 
+                Carte OKAY Savoie collégien
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-row>
+            <ion-col>
+            <ion-button type="submit" color="primary" expand="block" [disabled]="!onStep3Form.valid"> Suivant </ion-button>
+            </ion-col>
+            </ion-row>
+            </form>
+          
+
+
+            <form [formGroup]="onStep4Form" (ngSubmit)="submitForm4()" novalidate class="list-form"  *ngIf="form4">
+            <h2 color="primary"> Mentions légales </h2>
+            <ion-item >
+            <ion-checkbox slot="start" [(ngModel)]="check1"  formControlName="check1"></ion-checkbox>
+             Droit à l'image - 
+             J’autorise la prise de vues et l’utilisation de mon image quel qu’en soit le support, par l’Association Méryforme exclusivement, 
+             pour la durée de mon adhésion
+            </ion-item>
+            <ion-item >
+            <ion-checkbox slot="start" [(ngModel)]="check2"  formControlName="check2"></ion-checkbox>
+            Règlement intérieur -
+            Veuillez prendre connaissance du règlement intérieur de Méryforme.
+            Je reconnais avoir accepté le règlement intérieur de l’association
+            <a href="https://www.api.meryforme.fr/pdf/Meryforme-Reglement-interieur.pdf" target="_blank" > Voir plus  </a>
+            </ion-item>
+            <ion-item class="ion-text-wrap">
+            <ion-checkbox slot="start" [(ngModel)]="check3"  formControlName="check3"></ion-checkbox>
+            Assurance fédérale -
+            La licence fédérale Sports pour tous inclut l'adhésion au contrat d'assurance collectif Individuel Accident et Assistance (Contrat MAIF n° 4532082R) dont vous pouvez prendre connaissance directement sur le site de la fédération.
+            Il est également possible de souscrire une garantie individuelle complémentaire directement sur le site du courtier aiac.
+            Je reconnais avoir été informé des dispositions de l'assurance fédérale incluse de base dans ma licence ainsi que de la garantie individuelle complémentaire que je peux souscrire par moi-même si je le souhaite
+            <a href="https://www.sportspourtous.org/fr/affilier-votre-club/assurance/assurance.html" target="_blank" > Voir plus  </a>
+           </ion-item>
+  
+            <ion-row>
+            <ion-col>
+            <ion-button type="submit" color="primary" expand="block" [disabled]="!onStep4Form.valid"> Enregistrer </ion-button>
+            </ion-col>
+            </ion-row>
+            </form>
+
+
+
+            <form   *ngIf="form5">
+              <h2 color="primary"> Mes réservations </h2>
+              <ion-list  >
+                <ion-item button class="ion-text-wrap" *ngFor="let item of catresult" >
+                  <ion-label>
+                    <ion-text>
+                      <h2><b>{{item.title}}</b></h2>
+                      <small> {{item.content}} </small> <br>
+                      <small> nb places :  {{item.nb_places}} - avec {{item.intervenant}}</small> <br>
+                      <ion-badge>  {{item.price}} € </ion-badge>
+                    </ion-text>
+                  </ion-label>
+                </ion-item>            
+              </ion-list>
+
+              <h2 color="primary"> Mon moyen de paiement </h2>
+              <ion-list  >
+              <ion-item *ngIf="moyendepaiement==1"> <b> CB (HelloAsso)</b> </ion-item>
+              <ion-item *ngIf="moyendepaiement==2"> <b> CB en 3 fois (HelloAsso)</b> </ion-item>   
+              <ion-item *ngIf="moyendepaiement==3"> <b> Chèque en 1 fois</b> </ion-item>   
+              <ion-item *ngIf="moyendepaiement==4"> <b> ANCV Chèque-Vacances</b> </ion-item>   
+              <ion-item *ngIf="moyendepaiement==5"> <b> ANCV Coupon Sport</b> </ion-item>   
+              <ion-item *ngIf="moyendepaiement==6"> <b> Pass'Sport</b> </ion-item>   
+              <ion-item *ngIf="moyendepaiement==7"> <b> Carte OKAY Savoie collégien</b> </ion-item>               
+              </ion-list>
+
+              <ion-row>
+              <ion-col>
+              <ion-button color="primary" expand="block"> Passer au paiement </ion-button>
+              </ion-col>
+              </ion-row>
+
+              </form>
+    
+    
+    
+</ion-col>  
+
+
+<ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+</ion-col>
+</ion-row>
+
+
+</ion-content>
